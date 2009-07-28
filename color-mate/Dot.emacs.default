@@ -1,0 +1,173 @@
+;;; Dot.emacs.default -- Coloring mule/emacs to more easier and more fun. -*-emacs-lisp-*-
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;   Color-Mate  Ver.10.4
+;;         by 横田 裕思 (yokota@netlab.is.tsukuba.ac.jp)
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;   Coloring mule/emacs to more easier and more fun.
+;;   mule / emacs で、色を使用して見やすい画面にします
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Author: YOKOTA Hiroshi <yokota@netlab.is.tsukuba.ac.jp>
+;; Maintainer: YOKOTA Hiroshi <yokota@netlab.is.tsukuba.ac.jp>
+;; Version: 10.4
+;; Keywords: color hilit19 font-lock color-mate theme
+;; Content-Type: text/plain; charset=x-euc-jp
+
+;$Id: Dot.emacs.default.in,v 1.3 2003/09/19 15:00:41 elca Exp $
+
+;----------------------------------;
+; 設定ファイルの読み込みパスの設定
+;----------------------------------;
+; Add "~/elisp/color-mate" to your load path.
+;
+; Color-Mate のファイルが ~/elisp/color-mate 以外の場所に有る時はここを
+; 変更して下さい。
+;(setq load-path
+;      (cons
+;       (expand-file-name
+;	"~/elisp/color-mate") load-path))
+(setq color-mate:base-path "/usr/share/emacs/21.2/site-lisp/color-mate")
+(setq load-path
+      (append
+       (list color-mate:base-path
+	     (concat color-mate:base-path "/theme")
+	     (concat color-mate:base-path "/contrib")
+	     (concat color-mate:base-path "/kanakan-cursor"))
+       load-path))
+
+;----------------------------------;
+;               設定
+;----------------------------------;
+;; theme file name (default "SunnyDay")
+(setq color-mate:theme-file "SunnyDay")
+;(load "cm_select")
+
+;------------------------------------------;
+; Drag & Drop Support for "Mule for Win32"
+;------------------------------------------;
+(if (and (boundp 'MULE)
+	 (eq window-system 'win32))
+    (load "win32dropfiles"))
+
+
+;-----------------;
+; Color-Mate 起動
+;-----------------;
+; start Color-Mate
+(if (and (>= (string-to-int emacs-version) 19)
+	 window-system )
+    (progn
+      (require 'color-mate)
+      (color-mate)
+      (require 'color-mate-face)
+      (color-mate:face)
+      ))
+
+;----------------------------------;
+; フォントセット選択メニューを使用
+;----------------------------------;
+(if (and (featurep 'xemacs)
+	 window-system)
+    (require 'xemacs-fontset-menu))
+
+;----------------------;
+; kanakan-cursor の使用
+;----------------------;
+;; cursor color with Input Method. (for mule/emacs/xemacs)
+;
+(if (and (>= (string-to-int emacs-version) 19)
+	 window-system)
+    (progn
+
+      ;; color-mate:theme からカーソル色の設定を抜きだすようにする。
+      (require 'assoc)
+      (require 'color-mate-util)
+
+      ;; skk (mule/xemacs)
+      ;; skk version 9.6 のカーソル着色機能を使用する。
+      ;; 事前に skk の設定をしておく事。
+      ;; skk-cursor2 は色の再定義をしているだけなので skk を使用していなくても
+      ;; 他に悪影響を与える事はない。
+      (if (and (fboundp 'skk-mode)
+	      (not (featurep 'xemacs)))
+	  (require 'skk-cursor2))
+
+      ;; これは skk version 8 用
+;      (if (fboundp 'skk-mode)
+;	  (progn
+;	    ;; 色を Color-Mate の設定と合わせる
+;	    (setq skk-cursor-color-for-default     color-mate-cursor-color)
+;	    (global-unset-key "\C-x\C-j")
+;	    (global-unset-key "\C-xj")
+;	    (global-set-key   "\C-x\C-j" 'skk-mode-with-color-cursor)
+;	    (global-set-key   "\C-xj" 'skk-auto-fill-mode-with-color-cursor)
+;	    (autoload 'skk-mode-with-color-cursor "skk-cursor" nil t)
+;	    (autoload 'skk-auto-fill-mode-with-color-cursor "skk-cursor" nil t)
+;	    ))
+
+      ;; leim
+      ;; leim とは Emacs/XEmacs20 用の多言語入力ライブラリです。
+      ;; leim-cursor は日本語だけでなく、他の言語の入力時にも有効となります。
+      ;; ただし、 leim は Emacs19 の skk と機能が衝突するため、 Emacs20 に
+      ;; おいて leim と skk は同時使用が出来ません。leim には skk 相当の
+      ;; 入力システムがあるのでこちらをお使い下さい。
+      (if (>= (string-to-int emacs-version) 20)
+	  (progn
+	    (setq leim-mode-off-cursor-color
+		  (aget color-mate:theme 'cursor-background-color))
+	    (require 'leim-cursor)))
+
+      ;; Wnn
+      (if (and (boundp 'WNN)
+	       (not (featurep 'xemacs)))
+	  (progn
+	    ;; 色を Color-Mate の設定と合わせる
+	    (setq egg-mode-off-cursor-color
+		  (aget color-mate:theme 'cursor-background-color))
+	    (require 'egg-cursor)))
+
+      ;; canna
+      ;; Canna 版 mule では canna.el が既ににロードされているので
+      ;; (featurep 'canna) では (canna) を実行したか分からない。
+      ;; そこでこれで正しいかどうかは分からないが、 canna-empty-info
+      ;; という変数が一度 Canna を起動すると t になる事を利用して
+      ;; ユーザーが Canna を使っているか(既に起動しているか)を判定する。
+      (if (and (boundp 'CANNA) canna-empty-info
+	       (not (featurep 'xemacs)))
+	  (progn
+	    ;; 色を Color-Mate の設定と合わせる
+	    (setq canna-mode-off-cursor-color
+		  (aget color-mate:theme 'cursor-background-color))
+	    (require 'canna-cursor)))
+
+      ;; SJ3
+      (if (and (boundp 'SJ3)
+	       (not (featurep 'xemacs)))
+	  (progn
+	    ;; 色を Color-Mate の設定と合わせる
+	    (setq sj3-mode-off-cursor-color
+		  (aget color-mate:theme 'cursor-background-color))
+	    (require 'sj3-cursor)))
+
+      ;; Windows IME (Mule for Windows)
+      (if (and (boundp 'MULE)
+	       (eq window-system 'win32))
+          (progn
+            (setq win32-ime-mode-off-cursor-color
+                  (aget color-mate:theme 'cursor-background-color))
+            (require 'win32-cursor)))
+      ))
+
+;; work-around for Emacs bug.
+(if (and (boundp 'emacs-major-version)
+	 (= emacs-major-version 21)
+	 (eq window-system 'x))
+    (modify-frame-parameters nil '((wait-for-wm . nil)))
+      )
+
+;;; Dot.emacs.default ends here

@@ -1,0 +1,80 @@
+;; 各種elispの読み込み
+(setq load-path
+      (append '("~/elisp/") load-path))
+
+;; canna関係
+;(load "~/elisp/canna.el")
+;; mew関係
+(load "~/elisp/mew.el")
+;; html-mode
+(load "~/elisp/html.el")
+;; 翻訳の王様
+;(load "~/elisp/king.el")
+;; sdic
+;(load "~/elisp/sdic.el")
+;; liece
+;(normal-top-level-add-to-load-path '("apel" "liece"))
+;(load "~/elisp/liece.el")
+;/usr/share/emacs/site-lisp/liece/liece.elc
+;namazu.el
+(autoload 'namazu "namazu" nil t)
+(setq browse-url-browser-function 'browse-url-netscape)
+
+; その他
+;(load "~/elisp/line.el")
+
+;; 各種設定
+(global-set-key "\M-?" 'help-for-help)
+(global-set-key [delete] 'delete-char)
+(setq inhibit-startup-message t)
+(setq line-number-mode t)
+(setq text-mode-hook '(lambda () (set-fill-column 70)))
+(setq text-mode-hool 'turn-on-auto-fill)
+(setq color-mate-line-space "3+3")
+
+(setq-default case-fold-search nil)
+(setq next-line-add-newlines nil)
+(setq kill-whole-line t)
+(line-number-mode 1)
+(setq visible-bell t)
+(defvar manual-program "/usr/bin/jman" "Japanese manual pages")
+(setq manual-program "/usr/bin/jman")
+
+(global-set-key "\C-xm" 'mew)
+(global-set-key "\C-xl" 'goto-line)
+(global-set-key "\M-0" 'delete-window)
+(global-set-key "\M-1" 'delete-other-window)
+
+(define-key global-map "\M- " 'set-mark-command)
+
+;; フォント
+(set-face-font 'default 
+'(
+"-microsoft-gothic-medium-r-normal--13-400-*-*-c-*-iso8859-*"
+"-microsoft-gothic-medium-r-normal--12-400-*-*-c-*-jisx0201.1976-*"
+"-microsoft-gothic-medium-r-normal--12-400-*-*-c-*-jisx0208.1983-*"
+))
+(set-face-font 'bold
+'(
+"-microsoft-gothic-medium-r-normal--13-*-*-*-c-*-iso8859-*"
+"-microsoft-gothic-medium-r-normal--12-*-*-*-c-*-jisx0201.1976-*"
+"-microsoft-gothic-medium-r-normal--12-*-*-*-c-*-jisx0208.1983-*"
+))
+(set-face-font 'bold-italic
+'(
+"-microsoft-gothic-medium-i-normal--13-*-*-*-c-*-iso8859-*"
+"-microsoft-gothic-medium-i-normal--12-*-*-*-c-*-jisx0201.1976-*"
+"-microsoft-gothic-medium-i-normal--12-*-*-*-c-*-jisx0208.1983-*"
+))
+
+;; 翻訳の王様キーバインド
+(global-set-key "\C-c\C-w" 'king-lookup-word)
+(global-set-key "\C-c\C-r" 'king-translate-region)
+(global-set-key "\C-c\C-b" 'king-translate-buffer)
+(global-set-key "\C-c\C-f" 'king-translate-file)
+(global-set-key "\C-c\C-e" 'king-add-userdict-region)
+(global-set-key "\C-c\C-a" 'king-add-userdict-buffer)
+(global-set-key "\C-c\C-u" 'king-add-userdict-file)
+
+;; その他キーバインド
+;(global-set-key "[F18]" 'canna-toggle-japanese-mode)

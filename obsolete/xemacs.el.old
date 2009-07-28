@@ -1,0 +1,138 @@
+;; 各種elispの読み込み
+(setq load-path
+      (append '("~/elisp/") load-path))
+
+;; canna関係
+;(load "~/elisp/canna.el")
+;; mew関係
+(load "~/elisp/mew.el")
+;; html-mode
+(load "~/elisp/html.el")
+;; 翻訳の王様
+(load "~/elisp/king.el")
+;; sdic
+(load "~/elisp/sdic.el")
+;; liece
+;(normal-top-level-add-to-load-path '("apel" "liece"))
+;(load "~/elisp/liece.el")
+;/usr/share/emacs/site-lisp/liece/liece.elc
+;namazu.el
+(autoload 'namazu "namazu" nil t)
+(setq browse-url-browser-function 'browse-url-netscape)
+
+; その他
+;(load "~/elisp/line.el")
+
+;; 各種設定
+(global-set-key "\M-?" 'help-for-help)
+(global-set-key [delete] 'delete-char)
+(setq inhibit-startup-message t)
+(setq line-number-mode t)
+(setq text-mode-hook '(lambda () (set-fill-column 70)))
+(setq text-mode-hool 'turn-on-auto-fill)
+(setq color-mate-line-space "3+3")
+
+(setq-default case-fold-search nil)
+(setq next-line-add-newlines nil)
+(setq kill-whole-line t)
+(line-number-mode 1)
+(setq visible-bell t)
+(defvar manual-program "/usr/bin/jman" "Japanese manual pages")
+(setq manual-program "/usr/bin/jman")
+
+(global-set-key "\C-xm" 'mew)
+(global-set-key "\C-xl" 'goto-line)
+(global-set-key "\M-0" 'delete-window)
+(global-set-key "\M-1" 'delete-other-window)
+
+(define-key global-map "\M- " 'set-mark-command)
+
+;; フォント
+(set-face-font 'default 
+'(
+"-naga-fixed-medium-r-normal-*-14-*-*-*-*-*-iso8859-1"
+"-morisawa-*-*-*-*-*-12-*-*-*-*-*-jisx0208.1983-*"
+"-morisawa-*-*-*-*-*-12-*-*-*-*-*-jisx0201.1976-*"
+))
+(set-face-font 'bold
+'(
+"-naga-fixed-medium-r-normal-*-14-*-100-100-*-*-iso8859-1"
+"-morisawa-*-*-*-*-*-12-*-*-*-*-*-jisx0208.1983-*"
+"-morisawa-*-*-*-*-*-12-*-*-*-*-*-jisx0201.1976-*"
+))
+(set-face-font 'bold-italic
+'(
+"-microsoft-mincho-medium-i-normal--13-*-*-*-c-*-iso8859-*"
+"-microsoft-gothic-medium-i-normal--12-*-*-*-c-*-jisx0201.1976-*"
+"-microsoft-gothic-medium-i-normal--12-*-*-*-c-*-jisx0208.1983-*"
+))
+
+;; 翻訳の王様キーバインド
+(global-set-key "\C-c\C-w" 'king-lookup-word)
+(global-set-key "\C-c\C-r" 'king-translate-region)
+(global-set-key "\C-c\C-b" 'king-translate-buffer)
+(global-set-key "\C-c\C-f" 'king-translate-file)
+(global-set-key "\C-c\C-e" 'king-add-userdict-region)
+(global-set-key "\C-c\C-a" 'king-add-userdict-buffer)
+(global-set-key "\C-c\C-u" 'king-add-userdict-file)
+
+;; その他キーバインド
+;(global-set-key "[F18]" 'canna-toggle-japanese-mode)
+
+;; 2005-01-14
+;; html-mode
+;;(load "~/elisp/html.el")
+;; sdic
+;;(load "~/elisp/sdic.el")
+;; wiki-mode
+;(load "~/elisp/emacs-wiki.el")
+; 行選択
+;(load "~/elisp/line.el")
+; namazu.el
+;(autoload 'namazu "namazu" nil t)
+;(setq browse-url-browser-function 'browse-url-netscape)
+;; migemo関係
+;(setq migemo-command "cmigemo")
+;(setq migemo-options '("-q" "--emacs" "-i" "\a"))
+;(setq migemo-dictionary "/usr/local/share/migemo/euc-jp/migemo-dict")
+;(setq migemo-user-dictionary nil)
+;(setq migemo-regex-dictionary nil)
+;(setq migemo-use-pattern-alist t)
+;(setq migemo-use-frequent-pattern-alist t)
+;(setq migemo-coding-system 'euc-japan-unix)
+;(load-library "migemo")
+;(migemo-init)
+;(add-hook 'minibuffer-setup-hook (lambda () (mac-im-set-key-script -17)))
+
+;; cvs
+;;(setq vc-default-back-end 'CVS)
+;;(load-library "vc-hooks")
+;;(setenv "CVS_RSH" "ssh")
+
+
+;; ホイール
+;;(define-key global-map 'button4
+;;'(lambda (&rest args)
+;;(interactive)
+;;(let ((curwin (selected-window)))
+;;(select-window (car (mouse-pixel-position)))(scroll-down 5)
+;;(select-window curwin)
+;;)))
+;;(define-key global-map 'button5
+;;'(lambda (&rest args)
+;;(interactive)
+;;(let ((curwin (selected-window)))
+;;(select-window (car (mouse-pixel-position)))
+;;(scroll-up 5)
+;;(select-window curwin)
+;;)))
+
+;; Window左右分割(testing)
+;(set-frame-position (selected-frame) 0 0)
+;(set-frame-size (selected-frame) 130 33)
+;(split-window-horizontally 90)
+
+;; ミニバッファ補完モード
+;(partial-completion-mode t)
+;; カーソル近くのファイルを開く
+;(ffap-bindings)
