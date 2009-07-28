@@ -121,19 +121,13 @@
 ;; ri
 ;;; ri-emacs‚ðŽg‚¤
 ;;(setq ri-ruby-script "~/elisp/ruby/ri-emacs.rb")
-;;(autoload 'ri "~/elisp/ruby/ri-ruby.el" nil t)
-;;(setq ri-ruby-script "~/elisp/ruby/ri-emacs.rb")
+(autoload 'ri "~/elisp/ruby/ri-ruby.el" nil t)
+(setq ri-ruby-script "~/elisp/ruby/ri-emacs.rb")
 ;;(add-hook 'ruby-mode-hook (lambda ()
 ;;                              (local-set-key 'f1 'ri)
 ;;                              (local-set-key "\M-\C-i" 'ri-ruby-complete-symbol)
 ;;                              (local-set-key 'f4 'ri-ruby-show-args)
 ;;                              ))
-
-;; auto-complete
-(require 'auto-complete-ruby)
-(add-hook 'ruby-mode-hook
-          (lambda ()
-            (setq ac-omni-completion-sources '(("\\.\\=" ac-source-rcodetools)))))
 
 ;; irbsh
 (load "irbsh")
