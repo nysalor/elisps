@@ -1,4 +1,6 @@
-;; desktop
+;; desktop•œŒ³‚È‚Ç
+;; –â‘è‚ª‘½‚¢‚½‚ßŽg—p’†Ž~
+
 (load "desktop")
 ;;(desktop-load-default)
 

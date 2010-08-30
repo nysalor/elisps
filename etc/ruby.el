@@ -1,44 +1,39 @@
 ;; inf-ruby mode
-(autoload 'ruby-mode "ruby-mode"                                                        
-  "Mode for editing ruby source files" t)                                               
-(setq auto-mode-alist                                                                   
-      (append '(("\\.rb$" . ruby-mode)) auto-mode-alist))                               
-(setq interpreter-mode-alist (append '(("ruby" . ruby-mode))                            
-                                     interpreter-mode-alist))                           
-(autoload 'run-ruby "inf-ruby"                                                          
-  "Run an inferior Ruby process")                                                       
-(autoload 'inf-ruby-keys "inf-ruby"                                                     
-  "Set local key defs for inf-ruby in ruby-mode")                                       
-(add-hook 'ruby-mode-hook                                                               
-          '(lambda ()                                                                   
-            (inf-ruby-keys)))                                                           
-(global-font-lock-mode 1)                                                               
-;;(setq default-frame-alist                                                               
-;;      (append                                                                           
-;;       '((foreground-color . "gray")  ;                                                 
-;;         (background-color . "black") ;                                                 
-;;         (cursor-color     . "blue")  ;
-;;        )                                                                               
-;; default-frame-alist))
+(autoload 'ruby-mode "ruby-mode"                                                          "Mode for editing ruby source files" t)
+(setq auto-mode-alist
+      (append '(("\\.rb$" . ruby-mode)) auto-mode-alist))
+(setq auto-mode-alist
+      (append '(("\\.rake$" . ruby-mode)) auto-mode-alist))
+(setq interpreter-mode-alist (append '(("ruby" . ruby-mode))
+                                     interpreter-mode-alist))
+(autoload 'run-ruby "inf-ruby" "Run an inferior Ruby process")
+(autoload 'inf-ruby-keys "inf-ruby" "Set local key defs for inf-ruby in ruby-mode")
+(add-hook 'ruby-mode-hook
+          '(lambda ()
+	     -keys)))
+(global-font-lock-mode 1)
 
-;; ruby-mode
-;;(setq interpreter-mode-alist
-;;      (cons '("ruby" . ruby-mode) interpreter-mode-alist))
-;;(setq auto-mode-alist
-;;      (cons '("\\.rb$" . ruby-mode) auto-mode-alist))
-;;(autoload 'ruby-mode "ruby-mode" nil t)
-;;(require 'ruby-block)
-;;(ruby-block-mode t)
-;;(setq ruby-block-highlight-toggle t)
+;; ruby-block
+;; ãƒ–ãƒ­ãƒƒã‚¯ã®ãƒã‚¤ãƒ©ã‚¤ãƒˆ
+(require 'ruby-block)
+(ruby-block-mode t)
+(setq ruby-block-highlight-toggle t)
 
 ;; ruby-electric
 ;;(require 'ruby-electric)
 
 ;; hideshow on ruby-mode
+;; C-c @ C-cã§ãƒ¡ã‚½ãƒƒãƒ‰ã‚„ã‚¯ãƒ©ã‚¹ãªã©ã‚’IDEã£ã½ãéš ã™
 (require 'hideshow)
 (add-hook 'ruby-mode-hook
           '(lambda()
              (hs-minor-mode 1)))
+
+;; flymake
+(load "~/elisp/ruby/ruby-flymake.el")
+
+;; rinari-extend
+;; (load "~/elisp/ruby/rinari-extend.el")
 
 (let ((ruby-mode-hs-info
       '( ruby-mode
@@ -51,7 +46,7 @@
     (setq hs-special-modes-alist
       (cons ruby-mode-hs-info hs-special-modes-alist))))
 
-;; Lisp mode ‚à‚»‚ê‚È‚è‚É‰B‚µ‚Ä‚­‚ê‚é‚Ì‚ÅA—LŒø‚É‚µ‚Ä‚İ‚½B
+;; Lisp mode(ãŠã¾ã‘)
 (add-hook 'lisp-interaction-mode-hook
            '(lambda ()
              (setq hs-minor-mode 1)))
@@ -59,13 +54,15 @@
            '(lambda ()
             (setq hs-minor-mode 1)))
 
-;; ‰B‚µ‚½(hide)s‚ÍAisearch‚Ì‘ÎÛ‚É‚µ‚È‚¢(outlineƒ‚[ƒh‚É‚à‰e‹¿)
-(setq search-invisible nil)  ;; u'openvorutv
+;; éš ã—ãŸè¡Œã‚‚isearchã®å¯¾è±¡ã«ã™ã‚‹
+(setq search-invisible nil)
 
-;; rails
+;; rails-mode
+;; rinariã«ç§»è¡Œ
+
 ;;(require 'rails)
 ;;(require 'cl)
-;; ƒL[ƒoƒCƒ“ƒh
+;; ã‚­ãƒ¼ãƒã‚¤ãƒ³ãƒ‰
 ;;(define-key rails-minor-mode-map [(control t)] 'rails-controller-layout:toggle-action-view)
 ;;(define-key rails-minor-mode-map [(control m)] 'rails-nav:goto-models)
 ;;(define-key rails-minor-mode-map [(control ,)] 'rails-nav:goto-controllers)
@@ -83,51 +80,59 @@
       (cons '("\\.yml$" . yaml-mode) auto-mode-alist))
 (autoload 'yaml-mode "yaml-mode" nil t)
 
-;(autoload 'ruby-mode "ruby-mode" "Mode for editing ruby source files")
-;(setq auto-mode-alist
-;(append '(("\\.rb$" . ruby-mode)) auto-mode-alist))
-;(setq interpreter-mode-alist (append '(("^#!.*ruby" . ruby-mode)) interpreter-mode-alist))
-;;(load "~/elisp/ruby.el")
+;; erb-mode
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . rhtml-mode))
 
-;; rrse
-;;(load "rrse")
-;;(rrse-setup)
-;;(add-hook 'ruby-mode-hook
-;;          '(lambda ()
-;;             (define-key ruby-mode-map C-c C-r 'rrse-help)))
+;; haml-mode
+;; ã„ã¤ã‹è¦šãˆãŸã„
+(require 'haml-mode)
+(add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
+
+;; sass-mode
+;; ã„ã¤ã‹è¦šãˆãŸã„
+(require 'sass-mode)
+(add-to-list 'auto-mode-alist '("\\.sass$" . sass-mode))
 
 ;; Rinari
+;; Railsé–‹ç™ºå‘ã‘æ‹¡å¼µ
 (add-to-list 'load-path "~/elisp/rinari")
 (require 'rinari)
 
-;;; rhtml-mode
+;; rhtml-mode
 (add-to-list 'load-path "~/elisp/rhtml")
 (require 'rhtml-mode)
 (add-hook 'rhtml-mode-hook
     (lambda () (rinari-launch)))
 
 ;;; chr code
-(nconc auto-coding-alist '(
-  ("\\.erb$" . utf-8)
-  ("\\.rb$" . utf-8)
-))
+;;(nconc auto-coding-alist '(
+;;  ("\\.erb$" . utf-8)
+;;  ("\\.rb$" . utf-8)
+;;))
 
 ;; yasnippet
+;; ä¾¿åˆ©ãªsnippet
 (setq load-path (cons (expand-file-name "~/elisp/yasnippet") load-path))
 (require 'yasnippet)
 (yas/initialize)
 (yas/load-directory "~/elisp/yasnippet/yasnippets-rails/rails-snippets")
 
 ;; ri
-;;; ri-emacs‚ğg‚¤
+;; ã†ã¾ãå‹•ã‹ãªã„ã®ã§ä¿ç•™
 ;;(setq ri-ruby-script "~/elisp/ruby/ri-emacs.rb")
-(autoload 'ri "~/elisp/ruby/ri-ruby.el" nil t)
-(setq ri-ruby-script "~/elisp/ruby/ri-emacs.rb")
+;;(autoload 'ri "~/elisp/ruby/ri-ruby.el" nil t)
+;;(setq ri-ruby-script "~/elisp/ruby/ri-emacs.rb")
 ;;(add-hook 'ruby-mode-hook (lambda ()
 ;;                              (local-set-key 'f1 'ri)
 ;;                              (local-set-key "\M-\C-i" 'ri-ruby-complete-symbol)
 ;;                              (local-set-key 'f4 'ri-ruby-show-args)
 ;;                              ))
+
+;; auto-complete
+(require 'auto-complete-ruby)
+(add-hook 'ruby-mode-hook
+          (lambda ()
+            (setq ac-omni-completion-sources '(("\\.\\=" ac-source-rcodetools)))))
 
 ;; irbsh
 (load "irbsh")
@@ -137,7 +142,3 @@
 
 ;; refe
 (require 'refe)
-
-(require 'ruby-block)
-(ruby-block-mode t)
-(setq ruby-block-highlight-toggle t)

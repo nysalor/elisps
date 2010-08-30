@@ -1,3 +1,6 @@
+;; 状態を保存・復元する
+;; 問題が多いので使用中止
+
 (autoload 'save-current-configuration "revive" "Save status" t)
 (autoload 'resume "revive" "Resume Emacs" t)
 (autoload 'wipe "revive" "Wipe emacs" t)

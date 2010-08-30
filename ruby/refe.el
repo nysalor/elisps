@@ -1,17 +1,17 @@
 (defvar refe-program-name
   (if (featurep 'meadow)
       "ruby"
-    "refe"))
+    "refe2"))
 (defvar refe-program-args
   (if (featurep 'meadow)
-      '("-S" "refe")
+      '("-S" "refe2")
     nil))
 (defvar refe-buffer-name "*Refe*")
 (defvar refe-completion-table nil)
 
 (defun refe-call-process (buf &rest args)
-;;  (let ((coding-system-for-read 'euc-japan))
-  (let ((coding-system-for-read 'utf-8))
+  (let ((coding-system-for-read 'euc-japan))
+;;  (let ((coding-system-for-read 'utf-8))
     (apply 'call-process refe-program-name nil buf nil
            (append refe-program-args args))))
 

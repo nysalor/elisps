@@ -1,4 +1,6 @@
-;;ecb
+;; ecb
+;; 現在使用していない
+
 (add-to-list 'load-path "~/elisp/ecb")
 (load-file "~/elisp/cedet/common/cedet.el")
 (require 'ecb)

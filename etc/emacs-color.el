@@ -1,38 +1,12 @@
-;;; Dot.emacs.default -- Coloring mule/emacs to more easier and more fun. -*-emacs-lisp-*-
+;; color-mate設定
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;;   Color-Mate  Ver.10.1
-;;         by 横田 裕思 (yokota@netlab.is.tsukuba.ac.jp)
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;;   Coloring mule/emacs to more easier and more fun.
-;;   mule / emacs で、色を使用して見やすい画面にします
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; Author: YOKOTA Hiroshi <yokota@netlab.is.tsukuba.ac.jp>
-;; Maintainer: YOKOTA Hiroshi <yokota@netlab.is.tsukuba.ac.jp>
-;; Version: 10.1
-;; Keywords: color hilit19 font-lock color-mate
-;; Content-Type: text/plain; charset=x-euc-jp
-
-;$Id: .emacs-color.el,v 1.2 2000/10/01 16:33:54 jun Exp $
-
-;----------------------------------;
-; 設定ファイルの読み込みパスの設定
-;----------------------------------;
-; Add "~/elisp/color-mate" to your load path.
-;
-; Color-Mate のファイルが ~/elisp/color-mate 以外の場所に有る時はここを
-; 変更して下さい。
+;; color-mateにロードパスを通す
 (setq load-path
       (cons
        (expand-file-name
 	"~/elisp/color-mate") load-path))
 
-
+;; XEmacsなんて使ってる人いるのかな？
 (if (string-match "XEmacs" emacs-version)
   (setq color-mate:base-path "/usr/lib/xemacs/site-packages/lisp/color-mate")
   (setq color-mate:base-path "/usr/share/emacs/site-lisp/color-mate")
@@ -45,21 +19,16 @@
 	     (concat color-mate:base-path "/kanakan-cursor"))
        load-path))
 
-;-------------------------------------------------------;
-; フォントの大きさの設定 10,12,14,16,18,20,24 から選べます
-;-------------------------------------------------------;
+;; フォントサイズ
+;; 基本的に無効
 ;(setq default-fontset "fontset-14")
 
-;-------------------------------------------------------;
-; テーマ設定 お気に入りのテーマファイルを選んでください
-;-------------------------------------------------------;
-;; theme file name (default "SunnyDay")
+;; テーマ
+;; 自作のテーマを読み込ませている
+;theme file name (default "SunnyDay")
 (setq color-mate:theme-file "~/elisp/etc/mytheme.el")
 
-;-----------------;
-; Color-Mate 起動
-;-----------------;
-; start Color-Mate
+;; start Color-Mate
 (if (and (>= (string-to-int emacs-version) 19)
 	 window-system )
     (progn
@@ -68,5 +37,3 @@
       (require 'color-mate-face)
       (color-mate:face)
       ))
-
-;;; color-mate.emacs.add ends here

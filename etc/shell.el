@@ -1,3 +1,5 @@
+;; シェルモード設定
+
 ;; エスケープシーケンス処理
 (autoload 'ansi-color-for-comint-mode-on "ansi-color"
    "Set `ansi-color-for-comint-mode' to t." t)

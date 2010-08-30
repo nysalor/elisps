@@ -2,7 +2,7 @@
 (setq load-path
       (cons
        (expand-file-name
-	"/usr/local/share/emacs/21.3.50/site-lisp/navi2ch") load-path))
+	"~/elisp/site-lisp/navi2ch") load-path))
 
 ;;初期設定
 (autoload 'navi2ch "navi2ch" "Navigator for 2ch" t)

@@ -1,3 +1,6 @@
+;; carbon emacs用設定
+;; ### メンテナンスしていません ###
+
 ;; 日本語環境
 (set-default-coding-systems 'utf-8)
 (set-clipboard-coding-system 'sjis-mac)

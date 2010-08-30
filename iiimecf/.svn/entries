@@ -1,0 +1,93 @@
+8
+
+dir
+3495
+http://svn.openi18n.org:8081/repos/im-sdk/trunk/iiimecf
+http://svn.openi18n.org:8081/repos/im-sdk
+
+
+
+2008-01-10T00:31:19.228914Z
+3437
+kawabata
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+01250a95-03bc-0310-afa3-dc8eafe9981b
+
+README.ja
+file
+
+
+
+
+2008-10-24T16:04:30.000000Z
+8e0692a3a64036c1616a8762ee4dcf95
+2007-12-09T00:16:22.217539Z
+3432
+kawabata
+
+lisp
+dir
+
+ChangeLog
+file
+
+
+
+
+2008-10-24T16:04:30.000000Z
+e71d935c7dc6b1c00ce5758cea5cc844
+2007-12-09T00:16:22.217539Z
+3432
+kawabata
+
+COPYING
+file
+
+
+
+
+2008-10-24T16:04:30.000000Z
+94d55d512a9ba36caa9b7df079bae19f
+2002-11-01T00:12:43.821282Z
+70
+
+iiimcf-comp.el
+file
+
+
+
+
+2008-10-24T16:04:30.000000Z
+023b5eb65a61c2b9de12e7286d1064a5
+2008-01-10T00:31:19.228914Z
+3437
+kawabata
+
+util
+dir
+
+README
+file
+
+
+
+
+2008-10-24T16:04:30.000000Z
+d5beca2c6cdf22a7445c656c1b604ab9
+2005-06-03T20:40:29.338377Z
+2652
+kawabata
+

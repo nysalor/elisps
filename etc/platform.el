@@ -1,7 +1,8 @@
-;; OS判定
+;; プラットフォームを判定して分岐する
+
 (cond
  ((string-match "apple-darwin" system-configuration)
-  (load "~/elisp/etc/carbon.el")
+  (load "~/elisp/etc/cocoa.el")
   )
  ((string-match "linux" system-configuration)
   (load "~/elisp/etc/linux.el")

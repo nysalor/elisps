@@ -1,0 +1,28 @@
+;; cocoa emacs用色設定
+
+(setq color-mate:theme
+      '(
+        (frame-background-color .          "black")
+        (frame-foreground-color .         "ivory")
+        (frame-height . 48)
+;;        (frame-width . 95)
+;;        (frame-height . 60)
+        (frame-width . 90)
+;       (frame-width . 130)
+        (modeline-background-color . "DimGrey")
+        (modeline-foreground-color . "LightGray")
+        ;(modeline-underlined . nil)
+        (modeline-buffer-id-foreground-color . "gray2")
+        (modeline-mousable-foreground-color . "white")
+        (modeline-mousable-minor-mode-foreground-color . "white")
+        ;(region-underlined . nil)
+        (region-background-color . "LightSlateGray")
+        (region-foreground-color . "gray95")
+        (cursor-background-color . "Sienna")
+        (cursor-foreground-color . "ivory")
+        (mouse-background-color . "Sienna")
+        (mouse-foreground-color . "ivory")
+        ;(menu-bar-lines . 1)
+        ;(font . "default-fontset")
+        ;(line-space . "2+2")
+        ))
