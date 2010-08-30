@@ -10,7 +10,7 @@
 (autoload 'inf-ruby-keys "inf-ruby" "Set local key defs for inf-ruby in ruby-mode")
 (add-hook 'ruby-mode-hook
           '(lambda ()
-	     -keys)))
+	     -keys))
 (global-font-lock-mode 1)
 
 ;; ruby-block
